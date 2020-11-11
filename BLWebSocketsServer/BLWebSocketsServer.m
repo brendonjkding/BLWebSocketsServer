@@ -33,9 +33,9 @@ static BLWebSocketsServer *sharedInstance = nil;
 
 @interface BLWebSocketsServer()
 
-@property (nonatomic, assign, readwrite) BOOL isRunning;
-@property (nonatomic, assign) dispatch_source_t timer;
-@property (nonatomic, assign) dispatch_queue_t networkQueue;
+@property (assign, readwrite) BOOL isRunning;
+@property (nonatomic, strong) dispatch_source_t timer;
+@property (nonatomic, strong) dispatch_queue_t networkQueue;
 /* Context representing the server */
 @property (nonatomic, assign) struct libwebsocket_context *context;
 @property (nonatomic, strong) BLAsyncMessageQueue *asyncMessageQueue;
@@ -164,7 +164,7 @@ static BLWebSocketsServer *sharedInstance = nil;
 }
 
 - (void)cleanup {
-    dispatch_release(self.timer);
+    // dispatch_release(self.timer);
     [self destroyContext:self.context];
     self.context = NULL;
     [self.asyncMessageQueue reset];
