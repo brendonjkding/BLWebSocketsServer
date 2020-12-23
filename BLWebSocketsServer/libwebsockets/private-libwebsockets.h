@@ -89,7 +89,9 @@
  * but happily have something equivalent in the SO_NOSIGPIPE flag.
  */
 #ifdef __APPLE__
+#ifndef MSG_NOSIGNAL
 #define MSG_NOSIGNAL SO_NOSIGPIPE
+#endif
 #endif
 
 #ifndef LWS_MAX_HEADER_NAME_LENGTH
